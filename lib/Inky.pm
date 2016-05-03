@@ -73,7 +73,7 @@ my %COMPONENTS = (
         my ($self, $element, $inner) = @_;
         my $size = $element->attr('size') // $DEFAULT_SPACER_SIZE_PX;
         return sprintf '<table class="%s"><tbody><tr><td height="%dpx" style="font-size:%dpx;line-height:%dpx;">&nbsp;</td></tr></tbody></table>',
-            _classes($element, 'spacer'), $size, $size, $size, $inner;
+            _classes($element, 'spacer'), $size, $size, $size;
     },
     wrapper => sub {
         my ($self, $element, $inner) = @_;
