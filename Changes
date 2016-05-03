@@ -1,6 +1,7 @@
 Changelog for Inky
 
-0.161230 2016-05-02T14:04:11Z
+0.161240 2016-05-03T14:32:57Z
  [Marco Fontani]
+ - use "nbsp" element for spacer
  - license is MIT
  - initial

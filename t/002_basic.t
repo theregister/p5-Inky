@@ -392,7 +392,7 @@ inky_compare('callout copies classes to the final HTML',
 </table>
 END
 
-# Using Mojo::DOM, &#xA0; gets replaced with the actual character
+# Using Mojo::DOM, &#xA0; or &nbsp; gets replaced with the actual character
 inky_compare('creates a spacer element with correct size',
     '<spacer size="10"></spacer>',
     <<"END");
