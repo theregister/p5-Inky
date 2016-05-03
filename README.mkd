@@ -1,0 +1,25 @@
+p5-Inky
+=======
+
+[![Build Status](https://api.travis-ci.org/theregister/p5-Inky.svg)](https://travis-ci.org/theregister/p5-Inky/)
+
+This module allows you to use the Inky template language in Perl, and follows
+the same structure and tests as the original Inky NPM module:
+https://github.com/zurb/inky
+
+See http://foundation.zurb.com/emails/email-templates.html for more information.
+
+Examples
+--------
+
+    use Inky;
+    my $html = '<columns large="12" small="12">Foo Bar</columns>';
+    say Inky->new->release_the_kraken($html);
+
+Copyright
+---------
+
+This software is copyright (c) 2016 by Situation Publishing.
+
+This is free software; you can redistribute it and/or modify it under
+the terms of the attached LICENSE file (the MIT license).
