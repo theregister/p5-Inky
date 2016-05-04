@@ -2,6 +2,7 @@ Changelog for Inky
 
 0.161250 2016-05-04T13:46:31Z
  [Marco Fontani]
+ - update Changelog before release
  - rename pod section "METHODS"
  - install more test modules for travis author tests
  - fix: spacer does not incorporate any element
