@@ -1,6 +1,11 @@
 Changelog for Inky
 
-0.161250 2016-05-04T13:46:31Z
+0.161251 2016-05-04T16:09:40Z
+ [Marco Fontani]
+ - make metacpan link to the right repo
+ - update changelog
+
+0.161250 2016-05-04T13:46:51Z
  [Marco Fontani]
  - update Changelog before release
  - rename pod section "METHODS"
@@ -12,5 +17,4 @@ Changelog for Inky
  - copyright holder change
  - add travis yml
  - use "nbsp" element for spacer
- - license is MIT
  - initial
