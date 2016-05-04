@@ -230,7 +230,7 @@ L<https://github.com/zurb/inky|https://github.com/zurb/inky>.
     my $html = '..';
     say Inky->new->release_the_kraken($html);
 
-=head1 SUBROUTINES/METHODS
+=head1 METHODS
 
 =method new
 

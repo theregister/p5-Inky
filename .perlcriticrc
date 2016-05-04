@@ -43,4 +43,4 @@ allow = for if
 allow = $@ $! $?
 
 [Documentation::RequirePodSections]
-lib_sections = NAME | SYNOPSIS | DESCRIPTION | SUBROUTINES/METHODS | COPYRIGHT AND LICENSE | AUTHOR
+lib_sections = NAME | SYNOPSIS | DESCRIPTION | METHODS | COPYRIGHT AND LICENSE | AUTHOR
