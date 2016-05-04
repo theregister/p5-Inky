@@ -1,7 +1,15 @@
 Changelog for Inky
 
-0.161240 2016-05-03T14:32:57Z
+0.161250 2016-05-04T13:46:31Z
  [Marco Fontani]
+ - rename pod section "METHODS"
+ - install more test modules for travis author tests
+ - fix: spacer does not incorporate any element
+ - do not auto-create license
+ - add readme
+ - make LICENSE explicit for the repo
+ - copyright holder change
+ - add travis yml
  - use "nbsp" element for spacer
  - license is MIT
  - initial
