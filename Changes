@@ -1,5 +1,10 @@
 Changelog for Inky
 
+0.161260 2016-05-05T17:01:03Z
+ [Marco Fontani]
+ - up prereq to Mojolicious 6.0
+ - update Changelog
+
 0.161251 2016-05-04T16:09:40Z
  [Marco Fontani]
  - make metacpan link to the right repo
