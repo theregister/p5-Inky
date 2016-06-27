@@ -87,9 +87,15 @@ sub _make_button {
 
     my $expander = q{};
 
+    # Prepare optional target attribute for the <a> element
+    my $target = '';
+    $target = ' target=' . $element->attr('target')
+        if $element->attr('target');
+
     # If we have the href attribute we can create an anchor for the inner
     # of the button
-    $inner = sprintf '<a href="%s">%s</a>', $element->attr('href'), $inner
+    $inner = sprintf '<a href="%s"%s>%s</a>',
+        $element->attr('href'), $target, $inner
         if $element->attr('href');
 
     # If the button is expanded, it needs a <center> tag around the content

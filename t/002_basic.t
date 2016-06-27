@@ -335,6 +335,22 @@ inky_compare('create a correct expanded button',
 </table>
 END
 
+inky_compare('creates a button with target="_blank"',
+    '<button href="http://zurb.com" target="_blank">Button</button>',
+    <<'END');
+<table class="button">
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td><a href="http://zurb.com" target="_blank">Button</a></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+END
+
 inky_compare('creates a menu with item tags inside',
     '<menu><item href="http://zurb.com">Item</item></menu>',
     <<'END');
