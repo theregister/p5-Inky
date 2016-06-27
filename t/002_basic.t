@@ -106,6 +106,43 @@ inky_compare('create a single column with first and last classes',
 </th>
 END
 
+inky_compare('creates a single column with first and last classes with no-expander',
+    '<columns large="12" small="12" no-expander>One</columns>',
+    <<'END');
+<th class="small-12 large-12 columns first last">
+  <table>
+    <tr>
+      <th>One</th>
+    </tr>
+  </table>
+</th>
+END
+
+inky_compare('creates a single column with first and last classes with no-expander="false"',
+    '<columns large="12" small="12" no-expander="false">One</columns>',
+    <<'END');
+<th class="small-12 large-12 columns first last">
+  <table>
+    <tr>
+      <th>One</th>
+      <th class="expander"></th>
+    </tr>
+  </table>
+</th>
+END
+
+inky_compare('creates a single column with first and last classes with no-expander="true"',
+    '<columns large="12" small="12" no-expander="true">One</columns>',
+    <<'END');
+<th class="small-12 large-12 columns first last">
+  <table>
+    <tr>
+      <th>One</th>
+    </tr>
+  </table>
+</th>
+END
+
 inky_compare('create two columns, one first, one last',
     '<columns large="6" small="12">One</columns><columns large="6" small="12">Two</columns>',
     <<'END');

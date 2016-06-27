@@ -152,6 +152,16 @@ sub _make_column {
     my @classes  = ();
     my $expander = q{};
 
+    my $attributes       = $col->attr;
+    my $attr_no_expander = exists $attributes->{'no-expander'}
+                         ? $attributes->{'no-expander'}
+                         : 0;
+    $attr_no_expander = 1
+        if exists $attributes->{'no-expander'}
+        && !defined $attributes->{'no-expander'};
+    $attr_no_expander = 0
+        if $attr_no_expander eq 'false';
+
     # Add 1 to include current column
     my $col_count = $col->following->size
                   + $col->preceding->size
@@ -184,7 +194,7 @@ sub _make_column {
     # If the column contains a nested row, the .expander class should not be
     # used. The == on the first check is because we're comparing a string
     # pulled from $.attr() to a number
-    if ($large_size == $self->column_count && $col->find('.row, row')->size == 0) {
+    if ($large_size == $self->column_count && $col->find('.row, row')->size == 0 && !$attr_no_expander) {
         $expander = qq!\n<th class="expander"></th>!;
     }
 
