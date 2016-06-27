@@ -40,6 +40,18 @@ inky_compare('simple inline element',
 </table>
 END
 
+inky_compare('does not choke on inline elements',
+    '<container>This is a link to <a href="#">ZURB.com</a>.</container>',
+    <<'END');
+<table class="container">
+     <tbody>
+         <tr>
+            <td>This is a link to <a href="#">ZURB.com</a>.</td>
+         </tr>
+     </tbody>
+</table>
+END
+
 inky_compare('special characters',
     '<container>This is a link tø <a href="#">ZURB.com</a>.</container>',
     <<'END');
