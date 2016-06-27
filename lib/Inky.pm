@@ -57,7 +57,7 @@ my %COMPONENTS = (
     button => \&_make_button,
     container => sub {
         my ($self, $element, $inner) = @_;
-        return sprintf '<table %s class="%s"><tbody><tr><td>%s</td></tr></tbody></table>',
+        return sprintf '<table %s align="center" class="%s"><tbody><tr><td>%s</td></tr></tbody></table>',
             _add_standard_attributes($element),
             _classes($element, 'container'), $inner;
     },

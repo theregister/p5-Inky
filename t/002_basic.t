@@ -31,7 +31,7 @@ sub inky_compare {
 inky_compare('simple inline element',
     '<container>This is a link to <a href="#">ZURB.com</a>.</container>',
     <<'END');
-<table class="container">
+<table align="center" class="container">
     <tbody>
         <tr>
             <td>This is a link to <a href="#">ZURB.com</a>.</td>
@@ -43,7 +43,7 @@ END
 inky_compare('does not choke on inline elements',
     '<container>This is a link to <a href="#">ZURB.com</a>.</container>',
     <<'END');
-<table class="container">
+<table align="center" class="container">
      <tbody>
          <tr>
             <td>This is a link to <a href="#">ZURB.com</a>.</td>
@@ -55,7 +55,7 @@ END
 inky_compare('special characters',
     '<container>This is a link tø <a href="#">ZURB.com</a>.</container>',
     <<'END');
-<table class="container">
+<table align="center" class="container">
     <tbody>
         <tr>
             <td>This is a link tø <a href="#">ZURB.com</a>.</td>
@@ -74,7 +74,7 @@ inky_compare('simple html doc with container',
         <head>
         </head>
         <body>
-            <table class="container">
+            <table align="center" class="container">
                 <tbody>
                     <tr>
                         <td></td>
@@ -87,7 +87,7 @@ END
 
 inky_compare('create a container table',
     '<container></container>',
-    '<table class="container"><tbody><tr><td></td></tr></tbody></table>');
+    '<table align="center" class="container"><tbody><tr><td></td></tr></tbody></table>');
 
 inky_compare('create a row',
     '<row></row>',
