@@ -240,10 +240,38 @@ END
         $class, _add_standard_attributes($col), $inner, $expander
 }
 
+sub _extract_raws {
+    my ($string) = @_;
+
+    my @raws;
+    my $i = 0;
+    my $str = $string;
+    my $rx  = qr{<\s*raw\s*>(.*?)</\s*raw\s*>}xism;
+
+    while (my ($raw) = $str =~ $rx) {
+        push @raws, $raw;
+        $str =~ s/$rx/###RAW$i###/xsm;
+        $i++;
+    }
+    return (\@raws, $str);
+}
+
+sub _reinject_raws {
+    my ($string, $raws) = @_;
+
+    my $str = $string;
+    for my $i (0..$#$raws) {
+        $str =~ s{[#]{3}RAW$i[#]{3}}{$raws->[$i]}xms;
+    }
+    return $str;
+}
+
 sub release_the_kraken {
     my ($self, $html) = @_;
 
-    my $dom = Mojo::DOM->new( $html );
+    my ($raws, $string) = _extract_raws($html);
+
+    my $dom = Mojo::DOM->new( $string );
     my $tags = join ', ',
         map { $_ eq 'center' ? "$_:not([data-parsed])" : $_ }
         @{ $self->_component_tags };
@@ -253,7 +281,8 @@ sub release_the_kraken {
         my $new_html = $self->_component_factory($elem);
         $elem->replace($new_html);
     }
-    return $dom->to_string;
+    $string = $dom->to_string;
+    return _reinject_raws($string, $raws);
 }
 
 1;

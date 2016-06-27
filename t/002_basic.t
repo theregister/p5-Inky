@@ -527,4 +527,16 @@ inky_compare('creates a wrapper that you can attach classes to',
 </table>
 END
 
+inky_compare('raw',
+    q!<raw><<LCG Program\TG LCG Coupon Code Default='246996'>></raw>!,
+    q!<<LCG Program\TG LCG Coupon Code Default='246996'>>!);
+
+inky_compare('does not muck with stuff inside raw',
+    '<raw><%= test %></raw>',
+    '<%= test %>');
+
+inky_compare('can handle multiple raw tags',
+    '<h1><raw><%= test %></raw></h1><h2>< raw >!!!</ raw ></h2>',
+    '<h1><%= test %></h1><h2>!!!</h2>');
+
 done_testing;
