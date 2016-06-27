@@ -301,6 +301,25 @@ inky_compare('does not choke if center tags are nested',
 </center>
 END
 
+inky_compare('transfers attributes to the final HTML',
+    '<row dir="rtl"><columns dir="rtl" valign="middle" align="center">One</columns></row>',
+    <<'END');
+<table class="row" dir="rtl">
+  <tbody>
+     <tr>
+      <th align="center" class="small-12 large-12 columns first last" dir="rtl" valign="middle">
+        <table>
+          <tr>
+            <th>One</th>
+            <th class="expander"></th>
+          </tr>
+        </table>
+      </th>
+     </tr>
+  </tbody>
+</table>
+END
+
 inky_compare('applies the class float-center to <item> elements',
     '<center><menu><item href="#"></item></menu></center>',
     <<'END');

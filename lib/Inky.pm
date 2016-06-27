@@ -27,6 +27,22 @@ sub _classes {
     return join q{ }, @classes;
 }
 
+sub _add_standard_attributes {
+    my ($element) = @_;
+
+    # Keep all attributes but these
+    my %skipped = map { $_ => 1 } qw<class id href size large no-expander small target>;
+    my $result  = '';
+    my $attrs   = $element->attr;
+
+    for my $attr (sort keys %$attrs) {
+        next if exists $skipped{$attr};
+        my $value = $attrs->{$attr} // '';
+        $result .= qq! $attr="$value"!;
+    }
+    return $result;
+}
+
 my %COMPONENTS = (
     columns => sub {
         my ($self, $element) = @_;
@@ -34,13 +50,15 @@ my %COMPONENTS = (
     },
     row => sub {
         my ($self, $element, $inner) = @_;
-        return sprintf '<table class="%s"><tbody><tr>%s</tr></tbody></table>',
+        return sprintf '<table %s class="%s"><tbody><tr>%s</tr></tbody></table>',
+            _add_standard_attributes($element),
             _classes($element, 'row'), $inner;
     },
     button => \&_make_button,
     container => sub {
         my ($self, $element, $inner) = @_;
-        return sprintf '<table class="%s"><tbody><tr><td>%s</td></tr></tbody></table>',
+        return sprintf '<table %s class="%s"><tbody><tr><td>%s</td></tr></tbody></table>',
+            _add_standard_attributes($element),
             _classes($element, 'container'), $inner;
     },
     inky => sub {
@@ -55,29 +73,34 @@ my %COMPONENTS = (
     menu => sub {
         my ($self, $element, $inner) = @_;
         my $center_attr = $element->attr('align') ? 'align="center"' : q{};
-        return sprintf '<table class="%s"%s><tr><td><table><tr>%s</tr></table></td></tr></table>',
+        return sprintf '<table %s class="%s"%s><tr><td><table><tr>%s</tr></table></td></tr></table>',
+            _add_standard_attributes($element),
             _classes($element, 'menu'), $center_attr, $inner;
     },
     item => sub {
         my ($self, $element, $inner) = @_;
-        return sprintf '<th class="%s"><a href="%s">%s</a></th>',
+        return sprintf '<th %s class="%s"><a href="%s">%s</a></th>',
+            _add_standard_attributes($element),
             _classes($element, 'menu-item'), $element->attr('href'), $inner;
     },
     center => \&_make_center,
     callout => sub {
         my ($self, $element, $inner) = @_;
-        return sprintf '<table class="callout"><tr><td class="%s">%s</td><td class="expander"></td></tr></table>',
+        return sprintf '<table %s class="callout"><tr><td class="%s">%s</td><td class="expander"></td></tr></table>',
+            _add_standard_attributes($element),
             _classes($element, 'callout-inner'), $inner;
     },
     spacer => sub {
         my ($self, $element, $inner) = @_;
         my $size = $element->attr('size') // $DEFAULT_SPACER_SIZE_PX;
-        return sprintf '<table class="%s"><tbody><tr><td height="%dpx" style="font-size:%dpx;line-height:%dpx;">&nbsp;</td></tr></tbody></table>',
+        return sprintf '<table %s class="%s"><tbody><tr><td height="%dpx" style="font-size:%dpx;line-height:%dpx;">&nbsp;</td></tr></tbody></table>',
+            _add_standard_attributes($element),
             _classes($element, 'spacer'), $size, $size, $size;
     },
     wrapper => sub {
         my ($self, $element, $inner) = @_;
-        return sprintf '<table class="%s" align="center"><tr><td class="wrapper-inner">%s</td></tr></table>',
+        return sprintf '<table %s class="%s" align="center"><tr><td class="wrapper-inner">%s</td></tr></table>',
+            _add_standard_attributes($element),
             _classes($element, 'wrapper'), $inner;
     },
 );
@@ -200,7 +223,7 @@ sub _make_column {
 
     # Final HTML output
     $output = <<'END';
-    <th class="%s">
+    <th class="%s" %s>
       <table>
         <tr>
           <th>%s</th>%s
@@ -210,7 +233,8 @@ sub _make_column {
 END
 
     my $class = join q{ }, @classes;
-    return sprintf $output, $class, $inner, $expander
+    return sprintf $output,
+        $class, _add_standard_attributes($col), $inner, $expander
 }
 
 sub release_the_kraken {
