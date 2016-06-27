@@ -505,6 +505,61 @@ inky_compare('creates a spacer element with correct size',
 </table>
 END
 
+inky_compare('creates a spacer with a default size or no size defined',
+    '<spacer></spacer>',
+    <<"END");
+<table class="spacer">
+  <tbody>
+    <tr>
+      <td height="16px" style="font-size:16px;line-height:16px;">\xA0</td>
+    </tr>
+  </tbody>
+</table>
+END
+
+inky_compare('creates a spacer element for small screens with correct size',
+    '<spacer size-sm="10"></spacer>',
+    <<"END");
+<table class="spacer hide-for-large">
+  <tbody>
+    <tr>
+      <td height="10px" style="font-size:10px;line-height:10px;">\xA0</td>
+    </tr>
+  </tbody>
+</table>
+END
+
+inky_compare('creates a spacer element for large screens with correct size',
+    '<spacer size-lg="20"></spacer>',
+    <<"END");
+<table class="spacer show-for-large">
+  <tbody>
+    <tr>
+      <td height="20px" style="font-size:20px;line-height:20px;">\xA0</td>
+    </tr>
+  </tbody>
+</table>
+END
+
+inky_compare('creates a spacer element for small and large screens with correct sizes',
+    '<spacer size-sm="10" size-lg="20"></spacer>',
+    <<"END");
+<table class="spacer hide-for-large">
+  <tbody>
+    <tr>
+      <td height="10px" style="font-size:10px;line-height:10px;">\xA0</td>
+    </tr>
+  </tbody>
+</table>
+<table class="spacer show-for-large">
+  <tbody>
+    <tr>
+      <td height="20px" style="font-size:20px;line-height:20px;">\xA0</td>
+    </tr>
+  </tbody>
+</table>
+END
+
 inky_compare('copies classes to the final spacer HTML',
     '<spacer size="10" class="bgcolor"></spacer>',
     <<"END");

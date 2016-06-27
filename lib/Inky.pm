@@ -95,10 +95,28 @@ my %COMPONENTS = (
     },
     spacer => sub {
         my ($self, $element, $inner) = @_;
-        my $size = $element->attr('size') // $DEFAULT_SPACER_SIZE_PX;
-        return sprintf '<table %s class="%s"><tbody><tr><td height="%dpx" style="font-size:%dpx;line-height:%dpx;">&nbsp;</td></tr></tbody></table>',
-            _add_standard_attributes($element),
-            _classes($element, 'spacer'), $size, $size, $size;
+        my $size;
+        my $html = '';
+        if ($element->attr('size-sm') || $element->attr('size-lg')) {
+            if ($element->attr('size-sm')) {
+                $size = $element->attr('size-sm');
+                $html .= qq!<table class="%s hide-for-large"><tbody><tr><td height="${size}px" style="font-size:${size}px;line-height:${size}px;">&nbsp;</td></tr></tbody></table>!;
+            }
+            if ($element->attr('size-lg')) {
+                $size = $element->attr('size-lg');
+                $html .= qq!<table class="%s show-for-large"><tbody><tr><td height="${size}px" style="font-size:${size}px;line-height:${size}px;">&nbsp;</td></tr></tbody></table>!;
+            }
+        } else {
+            $size = $element->attr('size') // $DEFAULT_SPACER_SIZE_PX;
+            $html = qq!<table class="%s"><tbody><tr><td height="${size}px" style="font-size:${size}px;line-height:${size}px;">&nbsp;</td></tr></tbody></table>!;
+        }
+        if ($element->attr('size-sm') && $element->attr('size-lg')) {
+            return sprintf $html,
+                _classes($element,'spacer'),
+                _classes($element,'spacer'),
+        }
+        return sprintf $html,
+            _classes($element,'spacer');
     },
     wrapper => sub {
         my ($self, $element, $inner) = @_;
