@@ -66,7 +66,7 @@ my %COMPONENTS = (
     center => \&_make_center,
     callout => sub {
         my ($self, $element, $inner) = @_;
-        return sprintf '<table class="callout"><tr><th class="%s">%s</th><th class="expander"></th></tr></table>',
+        return sprintf '<table class="callout"><tr><td class="%s">%s</td><td class="expander"></td></tr></table>',
             _classes($element, 'callout-inner'), $inner;
     },
     spacer => sub {

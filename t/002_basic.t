@@ -387,8 +387,8 @@ inky_compare('creates a callout with correct syntax',
     <<'END');
 <table class="callout">
     <tr>
-        <th class="callout-inner">Callout</th>
-        <th class="expander"></th>
+        <td class="callout-inner">Callout</td>
+        <td class="expander"></td>
     </tr>
 </table>
 END
@@ -398,8 +398,8 @@ inky_compare('callout copies classes to the final HTML',
     <<'END');
 <table class="callout">
     <tr>
-        <th class="callout-inner primary">Callout</th>
-        <th class="expander"></th>
+        <td class="callout-inner primary">Callout</td>
+        <td class="expander"></td>
     </tr>
 </table>
 END
