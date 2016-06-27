@@ -79,9 +79,12 @@ my %COMPONENTS = (
     },
     item => sub {
         my ($self, $element, $inner) = @_;
-        return sprintf '<th %s class="%s"><a href="%s">%s</a></th>',
+        my $target = '';
+        $target = sprintf ' target="%s"', $element->attr('target')
+            if $element->attr('target');
+        return sprintf '<th %s class="%s"><a href="%s"%s>%s</a></th>',
             _add_standard_attributes($element),
-            _classes($element, 'menu-item'), $element->attr('href'), $inner;
+            _classes($element, 'menu-item'), $element->attr('href'), $target, $inner;
     },
     center => \&_make_center,
     callout => sub {

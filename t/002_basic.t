@@ -423,6 +423,22 @@ inky_compare('creates a menu with item tags inside',
 </table>
 END
 
+inky_compare('creates a menu with items tags inside, containing target="_blank" attribute',
+    '<menu><item href="http://zurb.com" target="_blank">Item</item></menu>',
+    <<'END');
+<table class="menu">
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <th class="menu-item"><a href="http://zurb.com" target="_blank">Item</a></th>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+END
+
 inky_compare('creates a menu with classes',
     '<menu class="vertical"></menu>',
     <<'END');
