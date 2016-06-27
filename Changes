@@ -1,5 +1,19 @@
 Changelog for Inky
 
+0.161790 2016-06-27T16:07:00Z
+ [Marco Fontani]
+ - shut up perlcritic
+ - Update changes before release
+ - [inky] spacers can get size-sm/size-lg
+ - [inky] add support for raw tags
+ - [inky] add align=center to container
+ - [inky] fix menu item not being passed html target attribute
+ - [inky] pass attributes down
+ - [inky] add support for columns with no-expander attribute
+ - [inky] add optional target= for button
+ - [inky v1.2.2] callouts are tds, not ths
+ - [tests] add test for "does not choke on inline elements"
+
 0.161260 2016-05-05T17:01:03Z
  [Marco Fontani]
  - up prereq to Mojolicious 6.0

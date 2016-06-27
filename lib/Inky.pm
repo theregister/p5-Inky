@@ -35,7 +35,7 @@ sub _add_standard_attributes {
     my $result  = '';
     my $attrs   = $element->attr;
 
-    for my $attr (sort keys %$attrs) {
+    for my $attr (sort keys %{$attrs}) {
         next if exists $skipped{$attr};
         my $value = $attrs->{$attr} // '';
         $result .= qq! $attr="$value"!;
@@ -278,7 +278,7 @@ sub _reinject_raws {
     my ($string, $raws) = @_;
 
     my $str = $string;
-    for my $i (0..$#$raws) {
+    for my $i (0..$#{$raws}) {
         $str =~ s{[#]{3}RAW$i[#]{3}}{$raws->[$i]}xms;
     }
     return $str;
