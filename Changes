@@ -1,5 +1,9 @@
 Changelog for Inky
 
+0.161800 2016-06-28T08:46:21Z
+ [Marco Fontani]
+ - fix substitution regex for older perls
+
 0.161790 2016-06-27T16:07:00Z
  [Marco Fontani]
  - shut up perlcritic
