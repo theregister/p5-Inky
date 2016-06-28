@@ -279,7 +279,7 @@ sub _reinject_raws {
 
     my $str = $string;
     for my $i (0..$#{$raws}) {
-        $str =~ s{[#]{3}RAW$i[#]{3}}{$raws->[$i]}xms;
+        $str =~ s{\#{3}RAW$i\#{3}}{$raws->[$i]}xms;
     }
     return $str;
 }
