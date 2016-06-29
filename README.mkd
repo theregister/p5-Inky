@@ -122,11 +122,11 @@ and Foundation for Emails:
 
 That's all, folks!
 
-=head1 CHANGES FROM NPM VERSION
+Changes from the NPM version
+----------------------------
 
 The current version of this module is up-to-date with
-L<https://github.com/zurb/inky|https://github.com/zurb/inky> branch C<master>
-as of 2016-06-23.
+https://github.com/zurb/inky branch `master` as of 2016-06-23.
 
 Additional component tags aren't supported.
 
