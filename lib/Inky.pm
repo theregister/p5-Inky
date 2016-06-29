@@ -342,7 +342,7 @@ of the tags that L<Inky|Inky> introduces.
 
 You'll likely want to use the CSS from
 L<https://github.com/zurb/foundation-emails|https://github.com/zurb/foundation-emails>
-in order to style your HTML e-mails "properly" for use with L<Inky>.
+in order to style your HTML e-mails "properly" for use with L<Inky|Inky>.
 
 You'll want to use the HTML "wrapper template" from
 L<https://github.com/zurb/foundation-emails-template/blob/master/src/layouts/default.html|https://github.com/zurb/foundation-emails-template/blob/master/src/layouts/default.html>.
