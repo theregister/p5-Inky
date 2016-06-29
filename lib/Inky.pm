@@ -335,7 +335,122 @@ How many columns is the email supposed to have, defaults to 12 col layout
 Given some HTML possibly containing Inky template elements, returns it
 expanded.
 
+=head1 HOW TO USE INKY AND CREATE A FANTASTIC HTML EMAIL WITH IT
+
+See L<https://github.com/zurb/inky|https://github.com/zurb/inky> for an overview
+of the tags that L<Inky|Inky> introduces.
+
+You'll likely want to use the CSS from
+L<https://github.com/zurb/foundation-emails|https://github.com/zurb/foundation-emails>
+in order to style your HTML e-mails "properly" for use with L<Inky>.
+
+You'll want to use the HTML "wrapper template" from
+L<https://github.com/zurb/foundation-emails-template/blob/master/src/layouts/default.html|https://github.com/zurb/foundation-emails-template/blob/master/src/layouts/default.html>.
+
+You might want to convert that HTML into the templating system you are going to
+be using, such as L<Template|Template> or L<Text::Xslate|Text::Xslate>.
+
+For example, in L<Template|Template> you'll want to create a C<wrapper.tt>
+containing the above file's contents, and ensuring you have:
+
+    ...
+    <center>
+    [% content %]
+    </center>
+    ...
+
+You'll then be able to use the never-changing wrapper template to create
+beautiful HTML emails, creating a C<your_mailing_list.tt> which contains
+something like:
+
+    [%-
+    SET override_css = '
+        // any override to be placed _after_ the Foundation for Emails CSS
+    ';
+    WRAPPER "path/to/wrapper.tt"
+    -%]
+    Your email contents go here
+    [% END %]
+
+To style them "properly", you'll want to clone the repository at:
+L<https://github.com/zurb/foundation-emails|https://github.com/zurb/foundation-emails>,
+and make changes to the various source C<scss> files to fit your "brand",
+assuming the defaults aren't to your liking.
+
+Once done, you'll have to generate the CSS, using something like:
+
+    sass -t compact --sourcemap=none --no-cache foundation.scss > foundation.css
+
+If you want to include the foundation CSS and a newsletter-specific overriding
+CSS, you will want to modify the C<wrapper.tt> to contain, near the C<body>
+tag:
+
+  <body>
+    [%~# CSS::Inliner REQUIRES type = "text/css" ~%]
+    <style type="text/css">
+    [% foundation_css %]
+    [% override_css   %]
+    </style>
+    ....
+
+The C<style> I<must> go in the C<body> as otherwise some mailers will wail to
+"use" it.
+
+If you need to support Gmail and other mail readers which do I<not> allow
+inline styles, you'll likely have no option but to use
+L<CSS::Inliner|CSS::Inliner>, which - with the above C<style> addition to the
+C<wrapper.tt> template, will allow you to seamlessly inline your styles in the
+HTML email.
+
+It's entirely up to you to also use L<HTML::Packer|HTML::Packer> to ensure any
+useless whitespace and comments are trimmed from the resulting email.
+
+To sum up, and assuming you'll be using
+
+    use 5.010_001;
+    use strict;
+    use warnings;
+    use Inky;
+    use Template;
+    use HTML::Packer;
+    use CSS::Packer;
+    use CSS::Inliner;
+    use Path::Tiny;
+    use Carp qw<croak>;
+    # Create TT object, ensure the foundation for emails CSS is in the stash
+    my $TT = Template->new(
+        # any TT options go here
+    );
+    my $stash = {
+        foundation_css => path('./foundation.css')->slurp_utf8,
+        # your other data goes here
+    };
+    my $html = '';
+    $TT->process('your_mailing_list.tt', $stash, \$html)
+        or croak $TT->error;
+    # At this point $html contains the full "inky" templated email.
+    my $INKY    = Inky->new;
+    my $PACKER  = HTML::Packer->init;
+    my $parsed  = $INKY->release_the_kraken($html);
+    my $inliner = CSS::Inliner->new({ leave_style => 1, relaxed => 1 });
+    $inliner->read({ html => $parsed });
+    my $inlined  = $inliner->inlinify;
+    my $minified = $PACKER->minify( \$inlined, {
+        remove_comments => 1,
+        remove_newlines => 1,
+        do_stylesheet   => 'minify', # needs CSS::Packer
+    });
+    say $minified;
+    # $minified is your beautiful HTML email, with styles inlined,
+    # and ready to be sent to an unsuspecting user!
+
+That's all, folks!
+
 =head1 CHANGES FROM NPM VERSION
+
+The current version of this module is up-to-date with
+L<https://github.com/zurb/inky|https://github.com/zurb/inky> branch C<master>
+as of 2016-06-23.
 
 Additional component tags aren't supported.
 
