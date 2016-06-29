@@ -1,5 +1,18 @@
 Changelog for Inky
 
+0.161810 2016-06-29T18:33:13Z
+ [Marco Fontani]
+ - [Inky pod] fix missing text for link "Inky"
+ - [Readme] convert pod to markdown
+ - [Readme] add nicer/longer description based on the POD
+ - [Inky pod] add missing assumptions
+ - [Inky pod] add a long, but thorough example
+ - [Inky pod] add HTML for build status at bottom of POD
+ - [dist.ini] only support 5.14+
+ - [travis] only test 5.14+
+ - [travis] also test on 5.24
+ - [travis] always install Dist::Zilla
+
 0.161800 2016-06-28T08:46:21Z
  [Marco Fontani]
  - fix substitution regex for older perls
