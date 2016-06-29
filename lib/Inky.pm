@@ -405,7 +405,9 @@ HTML email.
 It's entirely up to you to also use L<HTML::Packer|HTML::Packer> to ensure any
 useless whitespace and comments are trimmed from the resulting email.
 
-To sum up, and assuming you'll be using
+To sum up, and assuming you'll be using Template, HTML::Packer and
+CSS::Inliner, here's a rough program to send a beautiful HTML email with Inky
+and Foundation for Emails:
 
     use 5.010_001;
     use strict;
