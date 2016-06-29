@@ -340,3 +340,9 @@ expanded.
 Additional component tags aren't supported.
 
 Differing amounts of columns are untested.
+
+=begin HTML
+
+ <p><a href="https://travis-ci.org/theregister/p5-Inky/"><img src="https://api.travis-ci.org/theregister/p5-Inky.svg" alt="Travis status" /></a></p>
+
+=end HTML
