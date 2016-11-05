@@ -290,14 +290,15 @@ sub release_the_kraken {
     my ($raws, $string) = _extract_raws($html);
 
     my $dom = Mojo::DOM->new( $string );
-    my $tags = join ', ',
+    my @tags =
         map { $_ eq 'center' ? "$_:not([data-parsed])" : $_ }
         @{ $self->_component_tags };
 
-    while ($dom->find($tags)->size) {
-        my $elem     = $dom->find($tags)->first;
-        my $new_html = $self->_component_factory($elem);
-        $elem->replace($new_html);
+    for my $tag (@tags) {
+        while (my $elem = $dom->find($tag)->first) {
+            my $new_html = $self->_component_factory($elem);
+            $elem->replace($new_html);
+        }
     }
     $string = $dom->to_string;
     return _reinject_raws($string, $raws);
